@@ -1,0 +1,11 @@
+
+.mat-dialog-container {
+    margin-left: 10%;
+    position: fixed;
+    bottom: 2rem;
+    left: 10%;
+    width: 80%;
+    max-width: 600px; /* Adjust as needed */
+    border-radius: 16px 16px 0 0;
+    /* box-shadow: 0 0 16px rgba(0, 0, 0, 0.2); */
+  }

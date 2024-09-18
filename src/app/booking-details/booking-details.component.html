@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="arrow">
+        <span class="material-symbols-outlined" (click)="navToBack()" style="font-size: 28px;">arrow_back</span>
+        <div class="help" (click)="navToHelp()">Help?</div>
+    </div>
+    <div class="sub-container">
+        @for (detail of jobDetails; track $index) {
+        <div class="name">
+            <span class="tittle">{{detail.userId.name}}</span><br>
+            <span>{{detail.items[0].scheduledDate}}</span>
+        </div>
+        <div class="customer-details">
+            <span class="sub-tittle">Details</span>
+            <div class="Details">
+                
+                <p>
+                    <span class="highlight-text">Location</span><br>
+                    {{detail.addressId.city}} {{detail.addressId.state}} {{detail.addressId.pincode}}
+                </p>
+                <div class="line"></div><br>
+                <div class="time-div">
+                    <p>
+                        <span class="highlight-text">Job start</span><br>
+                        12 Apr 06:30 PM
+                    </p>
+                    <p>
+                        <span class="highlight-text">Job End</span><br>
+                        12 Apr 07:30 PM
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="summary">
+            <span class="sub-tittle">Summary</span>
+            <div class="Details">
+                @for (item of detail.items; track $index) {
+                <div class="time-div">
+                    <span class="highlight-text">{{item.quantity}} &nbsp; X &nbsp; {{item.subCategoryId.name}}</span>
+                    <span class="sub-tittle">&#8377; &nbsp;{{item.serviceId.serviceVariants[0].price * item.quantity}}</span>
+                </div>
+                <div class="line"></div>
+                <br>
+                }
+                <!-- <div class="time-div">
+                    <p>
+                        <span>Others</span><br>
+                        <span class="highlight-text">Convenience Fee</span>
+                    </p>
+                    <p class="sub-tittle">{{noJobs[0].others}}</p>
+                </div>
+                <div class="line"></div>
+                <br> -->
+                <div class="time-div">
+                    <p>
+                        <span class="highlight-text">Total value</span><br>
+                        <!-- <span>commission {{noJobs[0].credit}} credits</span> -->
+                    </p>
+                    <p class="sub-tittle">{{detail.totalAmount}}</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

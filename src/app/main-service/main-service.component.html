@@ -1,0 +1,78 @@
+
+
+
+<div class="container">
+    <div class="sub-container">
+      <div class="address-bar">
+        <div class="add-cart">
+          <app-select-address></app-select-address>
+          
+          <span class="material-symbols-outlined" id="cart" (click)="navToCart()">
+            shopping_cart
+          </span>
+          @if (noOfItems>0) {
+            <span id="cart-items">{{noOfItems}}</span>
+          }
+        
+        </div>
+        <div class="search-bar">
+          <i class="bi bi-search search-icon" style="font-size: 1.3rem;"></i>
+          <input type="text" placeholder="Search for a service e.g.{{example}}" (input)="search($event)" [(ngModel)]="searchTerm">
+        </div>
+      </div>
+
+
+      <div class="service">
+                        
+            @for (item of services; track $index) {
+              <div class="service-div" (click)="selectedCategory(item._id,$index)">
+                <div class="service-image">
+                    <img [src]="item.imageKey">
+                </div>
+                <span>{{item.name}}</span>
+              </div>
+          
+            }
+      </div>
+
+      <div  class="cover-container">
+        <span>
+          <span class="small-tittle">Most Booked </span> <span class="bigTittle">Services</span>
+        </span>
+        <div class="wrapperrr">
+          <div *ngFor="let services of mostBooked" class="mostBooked">
+            <img [src]="services.image">
+            <span>{{services.name}}</span>
+            <span>Rs.{{services.price}}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="cover-container">
+        <span>
+          <span class="bigTittle">Coolie No1 </span> <span class="small-tittle" >Covered for you</span>
+        </span>
+        <div class="wrapperrr">
+          
+          <div *ngFor="let cover of covered; let i = index" [ngClass]="{'odd': i % 2 !== 0, 'even': i % 2 === 0}" class="covered">
+           
+            <section>
+              <span class="cover-tittle">{{cover.tittle}}</span>
+              <p class="cover-description">{{cover.description}}</p>
+              <button>Book</button>
+            </section>
+            <img [src]="cover.image">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div style="height:5rem;"></div>
+</div>
+
+<app-fotter id="footer"></app-fotter>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

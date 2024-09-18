@@ -1,0 +1,171 @@
+<div class="container">
+  <div class="sub-container">
+    <div class="address-bar">
+      <div class="add-cart">
+        <app-select-address></app-select-address>
+
+        <span class="material-symbols-outlined" id="cart" (click)="navToCart()">
+          shopping_cart
+        </span>
+        @if (noOfItems>0) {
+        <span id="cart-items">{{noOfItems}}</span>
+        }
+
+      </div>
+
+      <div class="search-bar" (click)="navToMainService()">
+        <i class="bi bi-search search-icon" style="font-size: 1.3rem;"></i>
+        <input type="text" [placeholder]="'Search for a service e.g.' + example">
+      </div>
+    </div>
+    <!-- <div class="ads">
+      <div class="wrapperrr">
+        <div *ngFor="let ad of ads" class="wrapperrr-div">
+          <img [src]="ad.src">
+        </div>
+      </div>
+    </div> -->
+
+    <!-- services ------------------ -->
+    <div class="service">
+      <div class="ser-tittle-view">
+        <span class="service-tittle">Services</span>
+        <button (click)="navToMainService()">View More</button>
+      </div>
+      <div class="service-main">
+        <div class="service-container">
+          <div *ngFor="let services of service; let i = index" class="service-div"
+            (click)="selectedCategory(services._id,i)">
+            <!-- <img [src]="services.image"> -->
+            @if (i<9) { 
+              <div class="img-div">
+                <img [src]="services.imageKey" alt="{{services.name}}">
+              </div>
+              <span>{{services.name}}</span>
+            }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- banners ---------------- -->
+  <div class="cover-container">
+    <!-- <span>
+        <span class="bigTittle">Coolie No1 </span> <span class="small-tittle" >Covered for you</span>
+      </span> -->
+    <div class="wrapperrr">
+
+      <div *ngFor="let cover of covered; let i = index" [ngClass]="{'odd': i % 2 !== 0, 'even': i % 2 === 0}"
+        class="covered" (click)="navToMainService()">
+
+        <section>
+          <span class="cover-tittle">{{cover.tittle}}</span>
+          <p class="cover-description">{{cover.description}}</p>
+          <button>Book</button>
+        </section>
+        <img [src]="cover.image">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Most booking ------------------- -->
+  <div class="cover-container">
+    <span>
+      <span class="bigTittle">Most Booked Services</span>
+    </span>
+    <div class="wrapperrr">
+      <div *ngFor="let services of mostBooked" class="mostBooked" (click)="navToMainService()">
+        <img [src]="services.image">
+        <span  class="ser-name">{{services.name}}</span>
+        <span class="price">Starting at &#8377;.{{services.price}}</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="cover-container">
+    <span>
+      <span class="small-tittle">Our core </span> <span class="bigTittle">Services</span>
+    </span>
+    <div class="wrapperrr">
+      <div *ngFor="let services of coreServices" class="coreServices" (click)="navToMainService()">
+        <img [src]="services.image">
+        <span>{{services.serviceName}}</span>
+        <span>Rs.{{services.price}}</span>
+       
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Ac and Appliances ------------ -->
+  <div class="cover-container">
+    <span>
+      <span class="bigTittle">AC & Appliance  Repair</span>
+    </span>
+    <div class="wrapperrr">
+      <div *ngFor="let services of acAppliences" class="coreServices" (click)="navToMainService()">
+        <img [src]="services.image">
+        <span  class="ser-name">{{services.name}}</span>
+        <span class="price">Starting at &#8377;.{{services.price}}</span>
+        <!-- <button>Book now</button> -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- our popular services ------------- -->
+  <div class="cover-container">
+    <span>
+      <span class="bigTittle"> Our Popular Services</span>
+    </span>
+    <div class="wrapperrr">
+      <div *ngFor="let services of popularServices" class="coreServices" (click)="navToMainService()">
+        <img [src]="services.image">
+        <span class="ser-name">{{services.name}}</span>
+        <span class="price">Starting at &#8377;.{{services.price}}</span>
+        <!-- <button>Book now</button> -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- reels ------------- -->
+  <div>
+    <span>
+      <span class="bigTittle"> Thoughtful  curations</span>
+    </span>
+    <div class="album-container">
+      <div class="video-list">
+        <div *ngFor="let video of albums; let j = index" class="video-thumbnail">
+          <button (click)="selectAlbum(j)">
+            <img [src]="video.image" alt="Video Thumbnail">
+            <!-- <p>Video {{ j + 1 }}</p> -->
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fullscreen Video Modal -->
+    <div *ngIf="currentVideoUrl" class="video-modal">
+      <div class="status-bar">
+        <div *ngFor="let progress of videoProgress" class="progress-bar">
+          <div class="progress" [style.width.%]="progress"></div>
+        </div>
+        <button (click)="closeVideo()" class="close-button">X</button>
+      </div>
+
+      <div class="video-wrapper">
+
+        <video #videoPlayer [src]="currentVideoUrl" autoplay (click)="onVideoClick($event)"
+          (timeupdate)="onTimeUpdate($event)" (ended)="onVideoEnded()"></video>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div style="height:5rem;"></div>
+</div>
+
+<app-fotter id="footer"></app-fotter>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

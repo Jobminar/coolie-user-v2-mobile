@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "425618348845",
+    "firebase_url": "https://coolie-9cc38-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "coolie-9cc38",
+    "storage_bucket": "coolie-9cc38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425618348845:android:57a161642424e088f611a4",
+        "android_client_info": {
+          "package_name": "com.taskTigerUser.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425618348845-0clfo95tcqulhf37cnsovmlebbkh945q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcziwgDyx2SxCSeuGbgFDr9_94R2tpDfk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425618348845-0clfo95tcqulhf37cnsovmlebbkh945q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+   
+  ],
+  "configuration_version": "1"
+}

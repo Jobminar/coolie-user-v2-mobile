@@ -1,0 +1,103 @@
+<div class="container">
+    
+    <div class="sub-container">
+        <span class="material-symbols-outlined" (click)="navToBack()">
+            keyboard_backspace
+        </span>
+        <!-- <div>
+            <app-select-address></app-select-address>
+        </div> -->
+        <div class="subCategoryVarient-div">
+            <div class="varient-div" *ngFor="let item of subCategoryVarient; let i = index">
+                <div class="varient-img">
+                    <img [src]="item.image"alt="{{item.name}}">
+                </div>
+                <section>
+                    <div class="name-div">
+                        <span>{{item.serviceId.name}}</span>
+                        <span class="material-symbols-outlined" (click)="expand(i)">
+                            {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
+                        </span>
+                    </div>
+                    <div *ngIf="expandedIndex === i" style="background-color: transparent;">
+                        <span>{{item.serviceId.description}}</span>
+                    </div>
+                   
+                    <div class="amount-btn">
+                        <span class="price">₹ {{item.serviceId.serviceVariants[0].price}}</span>
+                        <div id="delete">
+                            <span class="material-symbols-outlined" (click)="delete(item._id,item)">
+                            delete
+                            </span>
+                        </div>
+                        <div class="action-buttons">
+                            <!-- <button (click)="addItem(item)">Add</button>&nbsp; -->
+                            <span class="btns">
+                                <button class="btn" (click)="decrementCount(item)">-</button>
+                                <span class="count">{{item.quantity}}</span>
+                                <button class="btn" (click)="incrementCount(item)">+</button>
+                            </span>
+                        </div>
+                        
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+        <section class="booking-slot">
+            <div class="book">
+                @if(selectedSechudle==undefined){
+                    <span (click)="showSchedule()" class="sechudlePlaceHolder">Select the Schedule</span>
+                }
+                @else {
+                    <span>{{selectedSechudle}}</span>
+                }
+                
+                
+                <span class="material-symbols-outlined" (click)="showSchedule()">
+                    calendar_today
+                </span>&nbsp;
+            </div>
+            @if (subCategoryVarient.length>1) {
+                <p class="chec-box">
+                    <input type="checkbox" (change)="navToSeparate()"> &nbsp;<span> would like to have individual & different slots
+                        for services choosen</span>
+                </p>
+            }
+            <div class="working-dates" *ngIf="showScheduleSection">
+                <ng-container *ngFor="let item of nextFourDays; let index = index;">
+                  <div class="datess" [ngClass]="{'selected': selectedIndex === index}" (click)="selected(item, index)">
+                    <span>{{ item.day.substring(0,3).toUpperCase() }}</span>
+                    <span>{{ item.date.split('-')[0] }}</span>
+                    <!-- <span class="material-symbols-outlined">{{ item.workingStaus ? 'check' : 'close' }}</span> -->
+                  </div>
+                </ng-container>
+            </div>
+
+              <div class="time" *ngIf="showScheduleSection">
+                <ng-container *ngFor="let item of timing; let index = index;" >
+                    
+                        <div (click)="timeSelected(index)" class="time-div" [ngClass]="{'selected-Time':selectedTime===index}">
+
+                            <!-- <input type="radio" name="time" [(ngModel)]="time" value={{item.time}} -->
+                                <!-- (change)="timeSelected()"> -->
+                                <span>{{item.time}} {{item.stamp}}</span>
+                        </div>
+                    
+                  </ng-container>
+              </div>
+        
+
+                <div class="amount">
+                        <span class="time-span">&nbsp; {{amount}}</span>
+                        <button (click)="pay()">Place Order</button> 
+                </div>
+        </section>
+    </div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

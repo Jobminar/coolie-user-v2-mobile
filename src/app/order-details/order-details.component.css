@@ -1,0 +1,116 @@
+.container{
+    width: 95%;
+    height: 100%;
+    /* border: 1px solid black; */
+    position: relative;
+    left: 2.5%;
+    /* top: 5%; */
+    padding-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4rem;
+}
+.btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    border: 0;
+    
+}
+.btn button{
+    font-family: 'Inter' sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 16.94px;
+    letter-spacing: 0.02em;
+}
+.btn button:nth-child(1){
+    background-color: #D16611;
+    border: 0;
+    width: 6rem;
+    height: 2rem;
+    color: rgba(245, 245, 245, 1);
+    border-radius: 0.4rem;
+}
+.btn button:nth-child(2){
+    background-color: transparent;
+    border: 0;
+}
+.btn button:nth-child(3){
+    background-color: transparent;
+    border: 0.25px solid black;
+    width: 6rem;
+    height: 2rem;
+  
+    border-radius: 0.4rem;
+}
+
+.details-div{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 70%;
+    column-gap: 5%;
+}
+.img-div,.img-div img{
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    border:0.25px solid black;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.highlight{
+    font-family: 'Inter' sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 19.36px;
+    letter-spacing: 0.05em;
+}
+.text{
+    font-family: 'Inter' sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 16.94px;
+    color: rgba(0, 0, 0, 0.6);
+    
+}
+.add-btn{
+    background-color:#D16611;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 0.4rem;
+    border: 0;
+    font-family: 'Inter' sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.94px;
+    letter-spacing: 0.02em;
+    color:rgba(245, 245, 245, 1);
+    
+
+}
+.order-div{
+    width: 95%;
+    border: 0.25px solid black;
+    border-radius: 0.4rem;
+    padding: 2.5%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.order p{
+    display: flex;
+    justify-content: space-between;
+}
+.order span{
+    font-family: 'Inter' sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 16.94px;
+    
+
+}

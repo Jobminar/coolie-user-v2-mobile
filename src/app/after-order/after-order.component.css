@@ -1,0 +1,50 @@
+.container{
+    width: 95%;
+    height: 100vh;
+    position: relative;
+    /* top: 2.5%; */
+    left: 2.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.img-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-div img{
+    width: 8rem;
+    height: 8rem;
+}
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.content img{
+    width: 5rem;
+    height: 5rem;
+}
+.highlight , .material-symbols-outlined{
+    font-family: 'Roboto' sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600; 
+    color:  rgba(3, 159, 84, 1);
+}
+.normal-text{
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.55);
+    
+}
+
+a{
+    color: blue;
+}

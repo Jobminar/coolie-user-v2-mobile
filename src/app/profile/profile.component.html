@@ -1,0 +1,67 @@
+<br><br>&nbsp;&nbsp; &nbsp;<span class="material-symbols-outlined" (click)="navBack()">arrow_back</span><br><br>
+<div class="container">
+  
+    <div class="sub-container">
+        <div class="profile" (click)="navToEditProfile()">
+            <div class="image">
+                @if(!image){
+                    <img src="../assets/icons/profile.png" class="profile-img"> 
+                }@else {
+                <img [src]="image" class="profile-img"> 
+                }
+            </div>
+            <div class="details">
+                <div class="details-div">
+                    @if(!userName){
+                        <span>Name</span>
+                    }@else {
+                    <span>{{userName}}</span>  
+                    }
+                </div> 
+            </div>
+        </div>
+        <br>
+        <div class="category">
+            @for (item of options; track $index) {
+                <br>
+            <div  (click)="navTo(item.name)">
+                <div (click)="navTo(item.name)" class="icons-div">
+                    <span class="material-symbols-outlined" >{{item.icon}}</span>
+                    <span>{{item.name}}</span>
+                </div>
+                @if (item.name==='Policies') {
+                    <span class="material-symbols-outlined" (click)="openPolicies(item.name)" >arrow_forward_ios</span>
+               
+                }@else {
+                    <span class="material-symbols-outlined"  (click)="navTo(item.name)" >arrow_forward_ios</span>
+               
+                }
+               
+            </div>
+            @if (item.name==='Policies') {
+                <div *ngIf="showPolicy" class="policy">
+                    @for (policy of policies; track $index) {
+                        <div class="policy-div">
+                            <span>{{policy.name}}</span>
+                            <span>+</span>
+                        </div>
+                    }
+                </div>
+            }
+            <hr>
+
+            }
+        </div>
+        
+        
+        
+    </div>
+    <div style="height:5rem;"></div>
+</div>
+
+<app-fotter id="footer"></app-fotter>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

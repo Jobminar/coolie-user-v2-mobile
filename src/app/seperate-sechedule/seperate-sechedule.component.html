@@ -1,0 +1,91 @@
+<div class="container">
+    
+    <div class="sub-container">
+        <span class="material-symbols-outlined" (click)="navToBack()">
+            keyboard_backspace
+        </span>
+        <br>
+        <div>
+            <app-select-address></app-select-address>
+        </div>
+        <div class="subCategoryVarient-div">
+            <div class="varient-div" *ngFor="let item of subCategoryVarient; let i = index">
+                <div class="sub-div">
+                    <div class="varient-img">
+                        <img [src]="item.subCategoryId.imageKey"
+                            alt="{{item.name}}">
+                    </div>
+                    <section class="varient-section">
+                        <div class="name-div">
+                            <span>{{item.serviceId.name}}</span>
+                            <span class="material-symbols-outlined" (click)="expand(i)">
+                                {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
+                            </span>
+                        </div>
+                        <div *ngIf="expandedIndex === i" style="background-color: transparent;">
+                            <span>{{item.serviceId.description}}</span>
+                        </div>
+                        <div class="amount-btn">
+                            <span class="price">₹ {{item.serviceId.serviceVariants[0].price}}</span>
+                            <div class="action-buttons">
+
+                                <span class="btns">
+                                    <button class="btn" (click)="decrementCount(item)">-</button>
+                                    <span class="count">{{item.quantity}}</span>
+                                    <button class="btn" (click)="incrementCount(item)">+</button>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="sechudle-div">
+                            <span>Scheduled</span>
+                            <span class="material-symbols-outlined" (click)="showSechedule(i)">
+                                calendar_month
+                            </span>
+                        </div>
+                    </section>
+                    
+                </div>
+                <section class="booking-slot" *ngIf="showTime===i">
+
+                    <div class="working-dates">
+                        <ng-container *ngFor="let item of nextFourDays; let index = index;">
+                            <div class="datess" [ngClass]="{'selected': selectedIndex === index}"
+                                (click)="selected(item, index)">
+                                <p>{{ item.day.substring(0,3).toUpperCase() }}</p>
+                                <p>{{ item.date.split('-')[0] }}</p>
+                                <!-- <span class="material-symbols-outlined">{{ item.workingStaus ? 'check' : 'close'
+                                }}</span> -->
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="time">
+                        <ng-container *ngFor="let item of timing; let index = index;">
+                            <div (click)="selectedTime(item.time,index)" [ngClass]="{'selected-Time': selectedSechudleTime===index}">
+                                <!-- <input type="radio" name="time" (change)="selectedTime(item.time)"> -->
+                                <span>{{item.time}} {{item.stamp}}</span>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <br>
+                    <div class="set-button">
+                            <button (click)="setSchedule(item)" class="set-schedule-btn">Set Schedule</button>
+                    </div>
+                    <br>
+                </section>
+            </div>
+
+        </div>
+
+        <div class="amount">
+            <span class="time-span">&nbsp; {{amount}}</span><button (click)="placeOrder()">Continue</button>
+        </div>
+    </div>
+
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

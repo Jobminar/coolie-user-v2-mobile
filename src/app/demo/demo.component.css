@@ -1,0 +1,19 @@
+/* Ensure the dialog container is styled properly */
+.mat-dialog-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 5%;
+  width: 90%;
+  height: auto;
+  border-radius: 16px;
+  color: #ffff;
+  background-color:   rgba(13, 12, 12, 0.679);
+
+  padding: 8px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+

@@ -1,0 +1,114 @@
+/* .fottersss
+{
+    border: 0;
+    border-top: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0rem;
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: white;
+}
+.sub-fotterss
+{
+    display: flex;
+    flex-direction: column;
+}
+.material-symbols-outlined
+{
+   
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+span {
+    margin: 0; 
+    padding: 0;
+}
+.active .material-symbols-outlined {
+    color: blue;
+} */
+
+/* 
+.fottersss {
+    border: 0;
+    border-top: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: white;
+  }
+  .sub-fotterss {
+    display: flex;
+    flex-direction: column;
+  }
+  .material-symbols-outlined {
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  span {
+    margin: 0;
+    padding: 0;
+  }
+  .active .material-symbols-outlined,.active span  {
+    color: red;
+  }
+   */
+
+   .fottersss {
+    border: 0;
+    border-top: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: white;
+  }
+  
+  .sub-fotterss {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center align the icon and text */
+    cursor: pointer; /* Make the cursor a pointer on hover */
+  }
+  
+  .material-symbols-outlined {
+    font-size: 28px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .names {
+    display: none; /* Hide the names by default */
+  }
+  
+  .active {
+    background-color: #D16611;
+     /* Red background for active item */
+    border-radius: 25px; /* Optional: rounded corners */
+    padding: 0.5rem 0.5rem;
+  }
+  
+  .active .material-symbols-outlined {
+    color: white; /* Change icon color to white for active item */
+  }
+  
+  .active .names {
+    display: block; /* Show the names for the active item */
+    color: white; /* Change text color to white for active item */
+  }
+  

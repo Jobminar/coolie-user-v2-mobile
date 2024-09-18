@@ -1,0 +1,35 @@
+<div class="container">
+    <div>
+        <span class="material-symbols-outlined" (click)="navToBack()">
+            keyboard_backspace
+        </span>
+    </div>
+    <div>
+        
+        <input type="text" [(ngModel)]="destinationInput" (input)="fetchSuggestions()"
+            placeholder="Search for area, Street, Locality" class="input">
+        <ul>
+            @if (suggestions.length) {
+            @for (suggestion of suggestions; track $index) {
+            <li (click)="selectSuggestion(suggestion)">{{ suggestion.place_name }}</li>
+            }
+            }
+        </ul>
+    </div>
+    <div id="map"></div>
+    <div class="text-div">
+        <span class="material-symbols-outlined">
+            location_on
+        </span> 
+        <span>Map Location</span>
+    </div>
+    <div>
+        <span>{{destinationInput}}</span>
+    </div>
+    <button>Confirm location</button>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

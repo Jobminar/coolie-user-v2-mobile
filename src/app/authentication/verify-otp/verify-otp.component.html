@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="sub-container">
+        <span class="tittle">Enter Otp</span><br>
+        <span class="info-text">Please enter the code we just send to</span>
+        <p class="info-text">+91 {{number}}</p>
+        <br>
+                <!-- verification.component.html -->
+        <!-- app.component.html -->
+        <form [formGroup]="otp" >
+        <div class="input-div"> 
+                <input type="text" maxlength="1" formControlName="inputOne" (input)="onInput($event, 1)" #input1 (keydown)="onKeyDown($event,1)">
+                <input type="text" maxlength="1" formControlName="inputTwo" (input)="onInput($event, 2)" #input2 (keydown)="onKeyDown($event,2)">
+                <input type="text" maxlength="1" formControlName="inputThree" (input)="onInput($event, 3)" #input3 (keydown)="onKeyDown($event,3)">
+                <input type="text" maxlength="1" formControlName="inputFour" (input)="onInput($event, 4)" #input4 (keydown)="onKeyDown($event,4)">
+                <input type="text" maxlength="1" formControlName="inputFive" (input)="onInput($event, 5)" #input5 (keydown)="onKeyDown($event,5)">
+                <input type="text" maxlength="1" formControlName="inputSix" (input)="onInput($event, 6)" #input6 (keydown)="onKeyDown($event,6)">
+            </div>  
+          
+            <button type="submit" class="login-btn" (click)="login()">Verify</button>
+        </form>
+        
+  
+    
+    </div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

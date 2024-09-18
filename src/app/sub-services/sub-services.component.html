@@ -1,0 +1,119 @@
+<div class="container">
+
+    <div class="header">
+        <div class="arrow-logo">
+            <span class="material-symbols-outlined" (click)="navToBack()">
+                keyboard_backspace
+            </span>
+            <img src="assets/logo/logo png1.png">
+        </div>
+        <div class="support-cart">
+            <img src="assets/icons/customer-support.png">
+            
+                <span class="material-symbols-outlined" id="cart" style="font-size: 28px;" (click)="navToCart()">
+                    shopping_cart
+                </span>
+                <section id="cart-items">{{noOfItems}}</section>
+            
+        </div>
+    </div>
+    <section class="sub-container">
+        <div class="service">
+
+            @for (item of services; track $index) {
+            <div class="service-div" (click)="selectedCategory(item._id,$index)"
+            [ngClass]="{'selectedCat': $index === selectedCat}">
+
+                <div class="service-image">
+                    <img [src]="item.imageKey">
+                </div>
+                <span class="cat-name">{{item.name}}</span>
+            </div>
+
+            }
+        </div>
+        
+        <!-- <div class="selectedCategory-search">
+            <span> SelectedCategory</span>
+            <i class="bi bi-search search-icon" style="font-size: 1.3rem;"></i>
+        </div> -->
+
+        <!-- sub categoriess -->
+
+        <div class="ui-varient">
+            <div class="ui-varient-div" >
+                @for (item of services[selectedCat]?.uiVariant; track $index) {
+                <div
+                    [ngClass]="{'Uiselected': selectedIndex === $index}"
+                    (click)="selectVariant($index)" *ngIf="item!='None'" >
+                    <p >{{item}}</p>
+                </div>
+               
+            }
+            </div>
+        </div>
+        <section class="section-sub-category">
+
+            @if (filteredSubCat.length<=0) {
+                <span style="font-size:1.2rem;color:red">No Services Found for this category</span>
+            }@else {
+            <div class="subCategory-div">
+                <div class="subCategory-wrapper">
+                    <div class="subCategory" *ngFor="let item of filteredSubCat; let i = index" (click)="selectSubCategory(i)"
+                        [ngClass]="{'selected': i === selectedSubCatIndex}">
+                        <!-- <div class="Hline"></div> -->
+                    
+                            <div class="subCategory-img">
+                                <img [src]="item.imageKey"
+                                    alt="{{item.name}}">
+                            </div>
+                            <span class="cat-name">{{item.name}}</span>
+                        <br>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="subCategoryVarient-div">
+              
+                <!-- @if (subCategoryVarient.length===0) {
+                    <span style="font-size:1.2rem;color:red">No Services varients Found for this category</span>
+                } -->
+               
+                <br>
+                <div class="subVarient-div">
+                    <div class="varient-div" *ngFor="let item of filteredVarients; let i = index">
+                        <div class="varient-img">
+                            <img [src]="item?.image" alt="{{item.name}}">
+                        </div>
+                        <section>
+                            <div class="name-div">
+                                <span>{{item.name}}</span>
+                                <span class="material-symbols-outlined" (click)="expand(i)">
+                                    {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
+                                </span>
+                            </div>
+                            <div *ngIf="expandedIndex === i" style="background-color: transparent;">
+                                <p id="description">{{item?.description}}</p>
+                            </div>
+                            <div class="amount-btn">
+                                <span class="price">₹ {{item?.price}}</span>
+                                <!-- <span class="price">₹ {{services[selectedCat].uiVariant[selectedIndex]}}</span>  -->
+                                <div class="action-buttons">
+                                    <button (click)="addItem(item)" class="add-btn">Add</button>&nbsp;
+                                    <!-- <span *ngIf="item.isAdded" class="btns">
+                                        <button class="btn" (click)="decrementCount(item)">-</button>
+                                        <span class="count">{{item.count}}</span>
+                                        <button class="btn" (click)="incrementCount(item)">+</button>
+                                    </span> -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        }
+        </section>
+    </section>
+</div>
+
+<!-- <img [src]="'https://lh3.googleusercontent.com/a/ACg8ocKwh-NsXRtvfrKE5yUVRiFk-dAM7cpUFdpbWUyJBrQ1l-xVGw=s96-c'"> -->

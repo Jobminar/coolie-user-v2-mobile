@@ -1,0 +1,47 @@
+<div class="sub-container">
+    <span class="material-symbols-outlined">
+        keyboard_backspace
+    </span>
+    
+    <div class="subCategoryVarient-div">
+        <div class="varient-div" *ngFor="let item of subCategoryVarient; let i = index">
+            <div class="sub-div">
+                <div class="varient-img">
+                    <img [src]="'https://coolie1-dev.s3.ap-south-1.amazonaws.com/' + item.subCategoryId.imageKey"
+                        alt="{{item.name}}">
+                </div>
+                <section class="varient-section">
+                    <div class="name-div">
+                        <span>{{item.serviceId.name}}</span>
+                        <span class="material-symbols-outlined" (click)="expand(i)">
+                            {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
+                        </span>
+                    </div>
+                    <div *ngIf="expandedIndex === i" style="background-color: transparent;">
+                        <span>{{item.serviceId.description}}</span>
+                    </div>
+                    <div class="amount-btn">
+                        <span class="price">₹ {{item.serviceId.serviceVariants[0].price}}</span>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="price-details">
+        <span class="highlight">Price Details</span>
+        <span class="text"><span>Price Details</span><span>&#x20B9; 12,999</span></span>
+        <span class="text"><span>Discount</span><span>-</span></span>
+        <span class="text"><span>Coupons for you</span><span>-</span></span>
+        <span class="text"><span>Charges</span><span>-</span></span>
+        <span class="highlight"><span>Total Amount</span><span>&#x20B9; 12,999</span></span>
+    </div>
+    <br>
+    <div class="amount">
+        <span class="time-span">&nbsp; {{amount}}</span><button>Pay</button>
+    </div>
+</div>

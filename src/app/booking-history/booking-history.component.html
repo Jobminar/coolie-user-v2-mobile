@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="arrow">
+        <span class="material-symbols-outlined" (click)="navToBack()" style="font-size: 28px;" >arrow_back</span>&nbsp;
+        <span class="tittle"  >Job History</span>
+    </div>
+    <div class="sub-container">
+        <span class="bookingTittle">My Bookings</span>
+        <div>
+            @for (item of jobs; track $index) {
+            
+            <div class="section" (click)="selectedJob(item)">    
+                    <div>
+                       <p> <span class="main-text">{{item.userId.name}}</span></p>
+                       <p> 
+                            <span class="material-symbols-outlined"   >account_balance_wallet</span>&nbsp;
+                            <span class="text">Job value : {{item.totalAmount}}</span>
+                        </p>
+                        <p>
+                            <span class="material-symbols-outlined">description</span>&nbsp;
+                            <span class="text">Online Payments : {{item.totalAmount}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="main-text">{{item.items[0].selectedTime  }}</p>
+                        
+                        <p class="text">{{item.items[0].selectedDate}}-{{item.items[0].selectedMonth}}</p>
+                    </div>
+                </div> 
+                <br>
+               
+               
+            }
+        </div>
+    </div>
+    <div style="height:5rem;"></div>
+</div>
+
+<app-fotter id="footer"></app-fotter>

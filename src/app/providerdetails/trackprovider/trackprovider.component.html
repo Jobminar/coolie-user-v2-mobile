@@ -1,0 +1,53 @@
+<div class="container">
+    <div>
+        <div id="mapContainer" style="width: 100%; height: 500px;"></div>
+    </div>
+    <div class="sub-container" (click)="toggleOverlay()">
+        <div class="coming-div">
+            <span class="coming">Your worker is coming in 2.24</span>
+            <div class="line">
+
+            </div>
+        </div>
+        
+        <div class="profile-div">
+            <section class="img-div">
+                <img src="assets/icons/provider img.png">
+            </section>
+            <section class="details">
+                <span>
+                    Anil
+                </span>
+                <span>
+                    800(5 min away)
+                </span>
+                <span>
+                    4.9 (531 reviews)
+                </span>
+
+            </section>
+        </div>
+        <div class="otp-div">
+            <span>
+                Before Provider start the work
+            </span>
+            <span>Your Otp Pin</span>
+        </div>
+        <div class="otp">
+            <span>5</span> <span>0</span> <span>9</span> <span>0</span>
+        </div>
+        <div class="btns">
+            <span class="icon-div">
+                <span class="material-symbols-outlined">
+                    call
+                </span>
+                <span class="material-symbols-outlined">
+                    chat
+                </span>
+            </span>
+            <span>
+               &nbsp; <button (click)="navToDialog()">Cancel Booking</button>
+            </span>
+        </div>
+    </div>
+</div>

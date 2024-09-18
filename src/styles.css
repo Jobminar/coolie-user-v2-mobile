@@ -1,0 +1,91 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+.toast-center-center {
+    position: relative;
+    /* top: 50%; */
+    width:70%;
+    height: auto;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .toast-custom-class {
+    padding: 1rem;
+    background-color: rgba(0, 128, 0, 0.321) !important;
+    color: white !important;
+    position: relative;
+    padding-left: 50px; /* Adjust padding for icon space */
+  }
+  
+  .toast-custom-class .toast-title {
+    font-weight: 400;
+  }
+  
+  .toast-custom-class .toast-message {
+    color: white !important;
+  }
+  
+  .toast-custom-class::before {
+    content: "✓"; /* Simple checkmark */
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 10px; 
+    transform: translateY(-50%);
+  }
+  .toast-error-center {
+    position: fixed;
+    top: 5%;
+    width:70%;
+    height: auto;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
+  .toast-custom-class-error {
+    padding: 1rem;
+    background-color: rgba(232, 3, 3, 0.855) !important;
+    color: white !important;
+    position: relative;
+    padding-left: 50px; /* Adjust padding for icon space */
+  }
+  
+  .toast-custom-class-error .toast-title {
+    font-weight: 400;
+  }
+  
+  .toast-custom-class-error .toast-message {
+    color: white !important;
+  }
+  
+  .toast-custom-class-error::before {
+    content: "X"; /* Simple checkmark */
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 10px; 
+    transform: translateY(-50%);
+  }
+  /* Apply custom styles to all dialogs with the class .bottom-dialog-container */
+.bottom-dialog-container .mat-dialog-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 600px; /* Adjust as needed */
+  border-radius: 16px 16px 0 0;
+  background-color: #403f3f7d; /* Change background color */
+ 
+  padding: 16px; /* Adjust padding */
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

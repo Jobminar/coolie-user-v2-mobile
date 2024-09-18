@@ -1,0 +1,81 @@
+.container
+{
+    /* border: 1px solid black ; */
+    width: 100vw;
+    height: 100vh;
+  
+
+}
+.arrow{
+    padding: 1rem;
+    display: flex;
+   align-items: center;
+}
+.tittle{
+    font-family: 'Inter' sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-align: left;
+
+}
+.sub-container{
+    /* border: 1px solid rgb(216, 9, 9) ; */
+    width: 93%;
+    position: relative;
+    top: 3.5%;
+    left: 3.5%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.bookingTittle{
+    font-family: 'Inter'sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 24.2px;
+    text-align: left;
+
+}
+.section{
+    width: 100%;
+    height: 9rem;
+    border: 0.25px solid rgba(222, 221, 221);
+    box-shadow: 1px 3px 10px rgba(222, 221, 221, 0.5);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.section div{
+    padding: 1rem;
+    /* display: grid; */
+    /* justify-content: space-around; */
+    /* grid-template-rows: auto auto auto; */
+    
+    text-align: left;
+}
+
+.tittle{
+    font-family: 'Inter' sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 16.36px;
+   
+}
+
+.main-text{
+    font-family: 'Inter' sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 16.36px;
+   
+}
+.text , .section .material-symbols-outlined{
+    font-family: 'Inter' sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 14.52px;
+  
+}

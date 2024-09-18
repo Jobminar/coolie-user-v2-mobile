@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="sub-container">
+        <span class="material-symbols-outlined" (click)="navToBack()">
+            keyboard_backspace
+        </span>
+
+        <div class="new-address"(click)="navToAddAddress()" >
+            <div>
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+                <span>Add Address</span>
+            </div>
+            <span class="material-symbols-outlined">
+                arrow_forward_ios
+            </span>
+        </div>
+
+        <div class="line-div">
+            <div class="line"></div>
+            <span class="text">SAVED ADDRESSES</span>
+            <div class="line"></div>
+        </div>
+        
+        <div class="address-div">
+            @for (item of this.address; track $index) {
+                <div class="address">
+                    <div >
+                        <span class="material-symbols-outlined" style="font-size: 36px;">
+                            location_on
+                        </span>
+                    </div>
+                    <div (click)="selectAddress($index)">
+                        <p>{{item.add}}</p>
+                    </div>
+                    <div>
+                        <span class="material-symbols-outlined" (click)="deleteAddress($index)">
+                            delete
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div style="height: 0;width: 0;" id="mapContainer"></div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

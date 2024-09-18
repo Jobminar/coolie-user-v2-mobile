@@ -1,0 +1,27 @@
+<section class="container">
+    <div class="img-div">
+        <img src="assets/logo/logo png1.png">
+        
+    </div>
+    <div class="sub-container">
+        <div class="number-div">
+            <form>
+                <div class="input-container">
+                    <span class="country-code">+91</span>
+                    <input type="tel" maxlength="10" id="phoneNumber" placeholder="Mobile number" name="phoneNumber"
+                        [(ngModel)]="phoneNumber" class="number-input">
+                </div>
+                <!-- <section class="checkBox-section">
+                    <input type="checkbox" class="checkbox"> &nbsp;
+                    <span>By continuing you are agreeing to our terms and privacy policy
+                        <u>read more...</u>
+                    </span>
+                </section> -->
+            </form>
+            <button (click)="getOtp()" [disabled]="phoneNumber?.toString().length !== 10" 
+                  class="btn"  [ngClass]="{'disable-btn':phoneNumber?.toString().length !== 10}">GET OTP</button>
+        </div>
+        <div id="recaptcha-container"></div>
+    </div>
+</section>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

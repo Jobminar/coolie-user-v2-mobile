@@ -1,0 +1,61 @@
+<div class="address-bar">
+    <div class="location-icon">
+      <!-- <svg height="28px" viewBox="0 0 24 24" width="28px">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+      </svg> -->
+      <span class="material-symbols-outlined" id="location-icon">
+        near_me
+        </span>
+      <div class="address-text">
+        <!-- @if (name=='') {
+          <span style="display: flex;align-items: center;" class="add-span">
+            <span class="address-title">Current</span>
+            <span class="material-symbols-outlined" (click)="addresses()">
+              keyboard_arrow_down
+            </span>
+          </span>
+          @if (formattedAddresMp) {
+            <span class="address-details">{{formattedAddresMp.length>30 ? formattedAddresMp.substring(0, 30)+'....' : formattedAddresMp}}</span>
+          }
+         
+        } -->
+        <!-- @else { -->
+        <span  class="add-span">
+          <span class="address-title">{{name}}</span>
+          <span class="material-symbols-outlined" (click)="addresses()">
+            keyboard_arrow_down
+          </span>
+        </span>
+        <span class="address-details"> {{ addressDefault?.length > 30 ? addressDefault.substring(0, 30) + '....' : addressDefault }}</span>
+      <!-- } -->
+      </div>
+   
+    
+    </div>
+    <!-- @if (showAddres) {
+      <div class="address" id="address-div">
+        @for (item of address; track $index) {
+          <div class="address" (click)="selectAddress($index)">              
+            <span>{{item.name}}</span>
+            <span>{{item.address}}</span>
+        </div>
+        <div id="line" *ngIf="$index!=address.length-1"></div>
+        }
+        <div class="new-address"(click)="navToAddAddress()" >
+            <div>
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+                <span>Add Address</span>
+            </div>
+            <span class="material-symbols-outlined">
+                arrow_forward_ios
+            </span>
+        </div>
+    </div>
+    
+    } -->
+   
+  </div>

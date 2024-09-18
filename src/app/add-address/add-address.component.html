@@ -1,0 +1,87 @@
+<div class="container">
+    <span class="material-symbols-outlined" (click)="navToBack()">
+        keyboard_backspace
+    </span>
+    <section>
+
+        <div class="current-location" (click)="getCurrentAddress()">
+            <span class="material-symbols-outlined">
+                my_location
+            </span>
+            <span> Use Current location</span>
+        </div>
+        <div class="current-location" (click)="navToMap()">
+            <span class="material-symbols-outlined">
+                my_location
+            </span>
+            <span> Choose on map</span>
+        </div>
+    </section>
+    <div class="form-div">
+        @if (!useCurentLocation) {
+        <form [formGroup]="address" (submit)="submit()">
+            <div class="input-div">
+                <label for="username">Name</label>
+                <input type="text" name="username" formControlName="username">
+            </div>
+            <div class="input-div">
+                <label for="address">Address</label>
+                <input type="text" name="address" formControlName="address">
+            </div>
+            <div class="input-div">
+                <label for="city">City</label>
+                <input type="text" name="city" formControlName="city">
+            </div>
+            <div class="input-div">
+                <label for="landmark">Landmark</label>
+                <input type="text" name="landmark" formControlName="landmark">
+            </div>
+            <div class="input-div">
+                <label for="state">State</label>
+                <input type="text" name="state" formControlName="state">
+            </div>
+
+            <div class="input-div">
+                <label for="pincode">Pincode</label>
+                <input type="text" name="pincode" formControlName="pincode">
+            </div>
+            <br>
+            <button type="submit">Save</button>
+        </form>
+        }
+        @else {
+        <form [formGroup]="currentAddress" (submit)="saveCurrentAddress()">
+            <div class="input-div">
+                <label for="name">Name</label>
+                <input type="text" name="name" formControlName="name">
+            </div>
+            <div class="input-div">
+                <label for="hno">H.no</label>
+                <input type="text" name="hno" formControlName="hno">
+            </div>
+            <div class="input-div">
+                <label for="appartment">Appartment</label>
+                <input type="text" name="appartment" formControlName="appartment">
+            </div>
+            <div class="input-div">
+                <label for="landmark">Locality</label>
+                <input type="text" name="landmark" formControlName="landmark">
+            </div>
+            <div class="input-div">
+                <label for="address">Address</label>
+                <input type="text" name="address" formControlName="address">
+            </div>
+            <br>
+            <button type="submit">Save</button>
+        </form>
+        }
+    </div>
+</div>
+<div>
+    <div id="mapContainer"  class="map-div"></div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

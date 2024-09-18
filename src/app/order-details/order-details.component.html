@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="btn">
+        <button>SOS</button>
+        <button>Help 
+            <span class="material-symbols-outlined" style="font-size: 12px;">
+            help
+            </span></button>
+        <button>OTP</button>
+    </div>
+    <div class="details-div">
+        <div class="img-div">
+            <img>
+        </div>
+        <div class="details">
+            <span class="highlight">Provider </span>
+            <span class="text">Name :</span>
+            <span class="text">Phone :</span>
+        </div>
+    </div>
+    <button class="add-btn">Add Services</button>
+    <div class="order-div">
+        @for (item of orderDetails; track $index) {
+            <div class="order">
+                <p>
+                    <span>{{item.name}}</span><span>{{item.price}}</span>
+                </p>
+                <p>
+                   <span> {{item.time}}</span>
+                </p>
+            </div>
+        }
+    </div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

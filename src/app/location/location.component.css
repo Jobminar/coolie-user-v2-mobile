@@ -1,0 +1,94 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pin-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Default Pin Icon (Orange) */
+.pin {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: #d87226; /* Orange color */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pin::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 30px;
+    background-color: #d87226; /* Stem color */
+    bottom: -30px;
+}
+
+.pin::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* Wave Effect */
+.wave {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(216, 114, 38, 0.2); /* Transparent orange */
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Success state (Green with tick mark) */
+.pin.success {
+    background-color: #28a745; /* Green color */
+}
+
+.pin.success::before {
+    background-color: #28a745; /* Green stem */
+}
+
+.pin.success::after {
+    content: '\2714'; /* Unicode for tick mark */
+    width: auto;
+    height: auto;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+video{
+    width: 7rem;
+    height: auto;
+}
+p{
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}

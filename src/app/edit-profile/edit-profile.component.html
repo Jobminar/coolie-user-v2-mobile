@@ -1,0 +1,79 @@
+<!-- <div class="container">
+   
+    <div class="sub-container">
+        <span class="material-symbols-outlined" (click)="navToBack()">
+            keyboard_backspace
+        </span>
+        <div class="profile-pic">
+            <img src="assets/demo/IMG_2828.JPG">
+        </div>
+        <div class="form-div">
+            <form [formGroup]="userDetails">
+                <label for="name">Name</label><br>
+                <input type="text" placeholder="name" id="name" name="name" formControlName="name">
+                <br>
+                <label for="email">Email</label><br>
+                <input type="email" placeholder="name" id="email" name="email" formControlName="email" (input)="emailVerify()">
+                <br>
+                
+                <label for="phone">Phone</label><br>
+                <input type="number" placeholder="phone" id="phone" name="phone" formControlName="phone" >
+                <br>
+                <div class="btn">
+                    <button>Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<div class="container">
+    <div class="sub-container">
+        <span class="material-symbols-outlined" (click)="navToBack()">
+            keyboard_backspace
+        </span>
+        <div class="profile-pic" (click)="triggerFileInput()">
+           
+            <img [src]="image? image:'assets/icons/profile.png'" alt="Profile Picture">
+            <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;">
+        </div>
+        <div class="form-div">
+            <form [formGroup]="userDetails">
+                <label for="name">Name</label><br>
+                <input type="text" placeholder="Name" id="name" name="name" formControlName="name">
+                <br>
+                <label for="dob">DOB</label><br>
+                <input type="date" placeholder="DOB" id="dob" name="dob" formControlName="dob" >
+                <br>
+                <label for="gender">Gender</label><br>
+                <div class="gender">
+                   <div> <input type="radio" id="gender" name="gender" value="male" formControlName="gender" > Male</div>
+                   <div><input type="radio" id="gender" name="gender" value="female" formControlName="gender" > Female</div>
+                </div>
+                <br>
+                <label for="email">Email</label><br>
+                <input type="email" placeholder="Email" id="email" name="email" formControlName="email" >
+                <br>
+                <label for="phone">Phone</label><br>
+                <input type="number" placeholder="Phone" id="phone" name="phone" formControlName="phone">
+                <br>
+                <label for="city">City</label><br>
+                <input type="text" placeholder="City" id="city" name="city" formControlName="city">
+                <br>
+                <div class="btn">
+                    <button type="submit" (click)="save()">Save changes</button>
+                </div>
+
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+ 
+  ></ngx-loading>

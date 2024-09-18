@@ -1,0 +1,36 @@
+<!-- 
+<div class="container">
+  
+        
+     
+        <div class="pin-container" *ngIf="!showAddress">
+            <div class="wave"></div>
+            <div class="pin"></div>
+        </div>
+      
+      
+    
+   
+   <p *ngIf="showAddress">
+    {{formattedAddress}}
+   </p>
+</div>
+<div id="mapContainer"  class="map-div"></div> -->
+
+<div class="container">
+    <div class="pin-container" *ngIf="!showAddress">
+      <div class="wave"></div>
+      <div class="pin" [ngClass]="{'success': showAddress}"></div>
+    </div>
+    @if (showAddress) {
+        <video autoplay loop muted >
+            <source src="assets/loading/complete loading.mp4" />
+        </video>
+    }
+    <!-- Show the address when location is fetched -->
+    <p *ngIf="showAddress">
+      {{formattedAddress}}
+    </p>
+  </div>
+  <div id="mapContainer" class="map-div"></div>
+  
