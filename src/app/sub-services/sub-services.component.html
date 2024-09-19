@@ -25,7 +25,7 @@
             [ngClass]="{'selectedCat': $index === selectedCat}">
 
                 <div class="service-image">
-                    <img [src]="item.imageKey">
+                    <img [src]="item.imageKey" loading="lazy">
                 </div>
                 <span class="cat-name">{{item.name}}</span>
             </div>
@@ -55,7 +55,7 @@
         <section class="section-sub-category">
 
             @if (filteredSubCat.length<=0) {
-                <span style="font-size:1.2rem;color:red">No Services Found for this category</span>
+                <span style="font-size:1.2rem;color:red">No Services Found for this category in this location</span>
             }@else {
             <div class="subCategory-div">
                 <div class="subCategory-wrapper">
@@ -65,7 +65,7 @@
                     
                             <div class="subCategory-img">
                                 <img [src]="item.imageKey"
-                                    alt="{{item.name}}">
+                                    alt="{{item.name}}" loading="lazy">
                             </div>
                             <span class="cat-name">{{item.name}}</span>
                         <br>
@@ -75,16 +75,14 @@
           
             <div class="subCategoryVarient-div">
               
-                <!-- @if (subCategoryVarient.length===0) {
-                    <span style="font-size:1.2rem;color:red">No Services varients Found for this category</span>
-                } -->
+                @if (filteredVarients.length===0) {
+                    <span style="font-size:1.2rem;color:red">This service are not available at your location </span>
+                }
                
                 <br>
                 <div class="subVarient-div">
                     <div class="varient-div" *ngFor="let item of filteredVarients; let i = index">
-                        <div class="varient-img">
-                            <img [src]="item?.image" alt="{{item.name}}">
-                        </div>
+                        
                         <section>
                             <div class="name-div">
                                 <span>{{item.name}}</span>
@@ -98,16 +96,19 @@
                             <div class="amount-btn">
                                 <span class="price">₹ {{item?.price}}</span>
                                 <!-- <span class="price">₹ {{services[selectedCat].uiVariant[selectedIndex]}}</span>  -->
-                                <div class="action-buttons">
-                                    <button (click)="addItem(item)" class="add-btn">Add</button>&nbsp;
-                                    <!-- <span *ngIf="item.isAdded" class="btns">
-                                        <button class="btn" (click)="decrementCount(item)">-</button>
-                                        <span class="count">{{item.count}}</span>
-                                        <button class="btn" (click)="incrementCount(item)">+</button>
-                                    </span> -->
-                                </div>
                             </div>
                         </section>
+                        <div class="varient-img">
+                            <img [src]="item?.image" loading="lazy" alt="{{item.name}}">
+                            <div class="action-buttons">
+                                <button (click)="addItem(item)" class="add-btn">Add</button>&nbsp;
+                                <!-- <span *ngIf="item.isAdded" class="btns">
+                                    <button class="btn" (click)="decrementCount(item)">-</button>
+                                    <span class="count">{{item.count}}</span>
+                                    <button class="btn" (click)="incrementCount(item)">+</button>
+                                </span> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

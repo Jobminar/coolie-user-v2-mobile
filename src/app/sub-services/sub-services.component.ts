@@ -42,14 +42,9 @@ export class SubServicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.userDetails.setCatFillDetails());
-    // console.log(this.servicesService.selectedIndex);
+   
     this.selectedCat = this.servicesService.selectedIndex;
-    // console.log(this.selectedCat);
     this.getService();
-    //  this.getSubCategories(this.servicesService.selectedServiceId)
-
-    // this.getLocationService();
     this.getPriceAndServiceAccLocation();
     this.getCount();
   }
@@ -65,32 +60,6 @@ export class SubServicesComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  // get the service according to location dist
-  getLocationService() {
-    this.servicesService
-      .getSubCatVarientFromLocation(this.userDetails.setCatFillDetails().dist)
-      .subscribe({
-        next: (res) => {
-          console.log(res, 'from location');
-          this.subCatVarFromLocation = res;
-        },
-        error: (err) => console.log(err),
-      });
-  }
-
-  getPriceAccPincode() {
-    this.servicesService
-      .getPriceAccPincode(this.userDetails.setCatFillDetails().pincode)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
   }
 
   getPriceAndServiceAccLocation() {
@@ -141,11 +110,11 @@ export class SubServicesComponent implements OnInit {
 
     this.selectedCat = index;
     // console.log('ui test', this.services[this.selectedCat].uiVariant);
-    
-    this.nameOfUiVarientSelected =this.services[this.selectedCat].uiVariant[0];
-    this.selectedIndex = 0;
-    this.servicesService.selectedUiVarientIndex = 0;
-    this.selectVariant(0);
+    // this.selectedSubCatIndex = 0;
+    // this.nameOfUiVarientSelected =this.services[this.selectedCat].uiVariant[0];
+    // this.selectedIndex = 0;
+    // this.servicesService.selectedUiVarientIndex = 0;
+    // this.selectVariant(0);
   }
 
   // getting the subcategories from selected category then assign the values to subCategory
@@ -153,16 +122,18 @@ export class SubServicesComponent implements OnInit {
   getSubCategories(id: any) {
     console.log("getting subcat----------------");
     this.servicesService.getSubCategoty(id).subscribe({
-      next: (response) => {
+      next: async (response) => {
         console.log(response, 'sub cat  normal');
         this.subCategory = response;
         // if (this.services[this.selectedCat].uiVariant.length === 1) {
           this.nameOfUiVarientSelected =this.services[this.selectedCat].uiVariant[0];
+          this.selectedSubCatIndex = 0;
           this.selectedIndex = 0;
           this.servicesService.selectedUiVarientIndex = 0;
-          this.selectVariant(0);
+         await this.selectVariant(0);
+          this. selectSubCategory(0)
         // }
-        this.getSubCategoryVarient();
+        
       },
       error: (error) => {
         console.log(error);
@@ -186,35 +157,19 @@ export class SubServicesComponent implements OnInit {
     this.getSubCategoryVarient();
   }
 
-  // getting the sub-category services varients like 1bhk 2bhk and sending this to add() to add the count in each varient
-  getSubCategoryVarient() {
-    const selectedId = this.servicesService.selectedServiceId;
-    const selectedSubCatId = this.subCategory[this.selectedSubCatIndex]._id;
-    this.servicesService
-      .getSubCatVarient(selectedId, selectedSubCatId)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.addingCount(response);
-        },
-        (error) => {
-          console.log(error);
-          this.subCategoryVarient = [];
-          this.filteredVarients = [];
-        }
-      );
-  }
+
 
   filteredSubCat: any = [];
   selectVariant(index: number): void {
-    
+    this.filteredVarients = [];
     // console.log(index, 'index ');
     this.servicesService.selectedUiVarientIndex = index;
     this.selectedIndex = this.servicesService.selectedUiVarientIndex;
 
     const selectedVariantName = this.services[this.selectedCat].uiVariant[this.selectedIndex];
-    // console.log('uivareint name', selectedVariantName);
+    console.log('uivareint name', selectedVariantName);
     this.nameOfUiVarientSelected = selectedVariantName;
+    console.log("sub category");
     // console.log(this.nameOfUiVarientSelected, 'name');
     if (selectedVariantName != 'None') {
       const filteredVariants = this.subCategory.filter(
@@ -225,13 +180,32 @@ export class SubServicesComponent implements OnInit {
     } else {
       this.filteredSubCat = this.subCategory;
     }
-    //   const filteredVariants = this.subCategory.filter((item: any) => item.variantName?.toLowerCase()=== selectedVariantName?.toLowerCase());
-    // this.filteredSubCat=filteredVariants;
+   
     console.log('sub category after filtering ui vaeints', this.filteredSubCat);
+    this.selectSubCategory(0);
   }
-
+  // getting the sub-category services varients like 1bhk 2bhk and sending this to add() to add the count in each varient
+  getSubCategoryVarient() {
+    const selectedId = this.servicesService.selectedServiceId;
+    const selectedSubCatId = this.filteredSubCat[this.selectedSubCatIndex]._id;
+    console.log("seleted cat id",selectedId, "selected sub cat id",selectedSubCatId);
+    this.servicesService
+      .getSubCatVarient(selectedId, selectedSubCatId)
+      .subscribe(
+        (response) => {
+          console.log(response,"service verits ");
+          this.addingCount(response);
+        },
+        (error) => {
+          console.log(error);
+          this.subCategoryVarient = [];
+          this.filteredVarients = [];
+        }
+      );
+  }
   // adding the quantity
   addingCount(item: any) {
+    console.log(item,"before adding count");
     item = item.map((element: any) => {
       return { ...element, count: 1, isAdded: false };
     });
@@ -244,23 +218,17 @@ export class SubServicesComponent implements OnInit {
 
   // filteringAccording to location
   filterAccLocation(item: any) {
-    // let fill: any[] = []; // Initialize 'fill' as an empty array
-    // console.log(this.subCatVarFromLocation,"from location");
-    // this.subCatVarFromLocation.forEach((i: any) => {
-    //   const matches = item.filter((cat: any) =>
-    //     i.servicename.toLowerCase() === cat.name.toLowerCase()
-    //   );
-
-    //   fill = fill.concat(matches); // Concatenate the matches to 'fill'
-    // });
-    // console.log(fill, "fill");
+    console.log(item,"for cheking before adding price");
+    // this.filteredVarients = [];
+ 
     let fill: any[] = []; // Initialize 'fill' as an empty array
-    console.log(this.subCatVarFromLocation, 'from location');
+    console.log(this.subCatVarFromLocation, 'sub-cat varient from location');
     console.log(
       this.services[this.selectedCat].uiVariant[this.selectedIndex],
       'ui name'
     );
     this.nameOfUiVarientSelected = this.services[this.selectedCat].uiVariant[0];
+    
     this.subCatVarFromLocation.forEach((i: any) => {
       // Filter items based on the matching servicename and cat name
       const matches = item
@@ -292,6 +260,8 @@ export class SubServicesComponent implements OnInit {
       'name of the ui vareint'
     );
     this.nameOfUiVarientSelected = this.services[this.selectedCat].uiVariant[0];
+    console.log(fill,"forchecking");
+    console.log(this.priceFromLoc,"for checking");
     let addedPrice;
     const add = fill.map((i: any) => {
       this.priceFromLoc.forEach((priceFL) => {

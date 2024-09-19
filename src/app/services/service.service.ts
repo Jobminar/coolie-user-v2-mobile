@@ -89,7 +89,8 @@ export class ServiceService {
   }
 
   getSubCatVarientFromLocation(dist:any){
-    const api=`https://api.coolieno1.in/v1.0/core/locations/district/${dist}`;
+    // const api=`https://api.coolieno1.in/v1.0/core/locations/district/${dist}`;
+    const api='https://api.coolieno1.in/v1.0/core/locations/district/Hyderabad';
     return this.http.get<any>(api);
   }
 
