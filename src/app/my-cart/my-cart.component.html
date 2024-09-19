@@ -10,11 +10,11 @@
         <div class="subCategoryVarient-div">
             <div class="varient-div" *ngFor="let item of subCategoryVarient; let i = index">
                 <div class="varient-img">
-                    <img [src]="item.image"alt="{{item.name}}">
+                    <img [src]="item?.image"alt="{{item.name}}">
                 </div>
                 <section>
                     <div class="name-div">
-                        <span>{{item.serviceId.name}}</span>
+                        <span>{{item.serviceId?.name}}</span>
                         <span class="material-symbols-outlined" (click)="expand(i)">
                             {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
                         </span>
@@ -24,9 +24,9 @@
                     </div>
                    
                     <div class="amount-btn">
-                        <span class="price">₹ {{item.serviceId.serviceVariants[0].price}}</span>
+                        <!-- <span class="price">₹ {{item.serviceId.serviceVariants[0].price}}</span> -->
                         <div id="delete">
-                            <span class="material-symbols-outlined" (click)="delete(item._id,item)">
+                            <span class="material-symbols-outlined" (click)="delete(item?._id,item)">
                             delete
                             </span>
                         </div>
@@ -34,7 +34,7 @@
                             <!-- <button (click)="addItem(item)">Add</button>&nbsp; -->
                             <span class="btns">
                                 <button class="btn" (click)="decrementCount(item)">-</button>
-                                <span class="count">{{item.quantity}}</span>
+                                <span class="count">{{item?.quantity}}</span>
                                 <button class="btn" (click)="incrementCount(item)">+</button>
                             </span>
                         </div>

@@ -30,7 +30,7 @@ import { authGuard } from './auth.guard';
 import { StartLoadingComponent } from './start-loading/start-loading.component';
 
 const routes: Routes = [
-  // {path:'load',component:StartLoadingComponent},
+ 
   {path:'',component:LocationComponent},
   {path:'home',component:HomeComponent},
   {path:'auth',loadChildren:()=> import('./authentication/authentication.module').then(m=>m.AuthenticationModule)},

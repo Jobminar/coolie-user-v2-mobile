@@ -134,14 +134,16 @@ export class SubServicesComponent implements OnInit {
 
   selectedCategory(item: any, index: any) {
    this.filteredSubCat=[];
- 
+    this.subCategory=[];
     this.servicesService.selectedServiceId = item;
     this.servicesService.selectedIndex = index;
     this.getSubCategories(item);
-    this.nameOfUiVarientSelected = this.services[this.selectedCat].uiVariant[0];
+
     this.selectedCat = index;
     // console.log('ui test', this.services[this.selectedCat].uiVariant);
     
+    this.nameOfUiVarientSelected =this.services[this.selectedCat].uiVariant[0];
+    this.selectedIndex = 0;
     this.servicesService.selectedUiVarientIndex = 0;
     this.selectVariant(0);
   }
@@ -154,13 +156,12 @@ export class SubServicesComponent implements OnInit {
       next: (response) => {
         console.log(response, 'sub cat  normal');
         this.subCategory = response;
-        if (this.services[this.selectedCat].uiVariant.length === 1) {
-          this.nameOfUiVarientSelected =
-            this.services[this.selectedCat].uiVariant[0];
+        // if (this.services[this.selectedCat].uiVariant.length === 1) {
+          this.nameOfUiVarientSelected =this.services[this.selectedCat].uiVariant[0];
           this.selectedIndex = 0;
           this.servicesService.selectedUiVarientIndex = 0;
           this.selectVariant(0);
-        }
+        // }
         this.getSubCategoryVarient();
       },
       error: (error) => {
@@ -177,7 +178,7 @@ export class SubServicesComponent implements OnInit {
   }
 
   // when user select the sub-category we are assigning the index of selected sub-cat to selectedSubCatIndex
-  // And calling to getSubCategoryVarients() to get the ui varients
+  // And calling to getSubCategoryVarients() to get the ui varients 
 
   selectSubCategory(index: any) {
     // this.selectedIndex=this.servicesService.selectedUiVarientIndex;
@@ -337,12 +338,14 @@ export class SubServicesComponent implements OnInit {
     }
     console.log(item);
     const userId = this.authenticService.getFromLocalStorage();
+    const price=Number(item.price)
     const requestBody = [
       {
         categoryId: item.categoryId._id,
         subCategoryId: item.subCategoryId._id,
         serviceId: item._id,
         quantity: item.count,
+        price:price,
         image: item.subCategoryId.imageKey,
         // price:item.serviceVariants[0].price*item.count
       },
