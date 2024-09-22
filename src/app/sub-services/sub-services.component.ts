@@ -52,7 +52,7 @@ export class SubServicesComponent implements OnInit {
   getService() {
     this.servicesService.getService().subscribe(
       (response) => {
-        console.log(response);
+        console.log(response,"services main ");
         this.services = response;
         this.getSubCategories(this.servicesService.selectedServiceId);
       },
@@ -64,7 +64,7 @@ export class SubServicesComponent implements OnInit {
 
   getPriceAndServiceAccLocation() {
     // console.log("==============================================================================");
-    // console.log(this.userDetails.categoryFilPincode, this.userDetails.categoryFilDist);
+    console.log(this.userDetails.categoryFilPincode, this.userDetails.categoryFilDist);
 
     combineLatest([
       this.servicesService
@@ -88,7 +88,7 @@ export class SubServicesComponent implements OnInit {
         // console.log("from dist and location", { serviceResponse, priceResponse });
         this.subCatVarFromLocation = serviceResponse;
         this.priceFromLoc = priceResponse;
-        console.log(this.priceFromLoc, 'price from loc');
+        console.log(this.priceFromLoc, 'price from pincode');
         console.log(this.subCatVarFromLocation, 'service from loc');
       },
       error: (err) => {
@@ -120,11 +120,12 @@ export class SubServicesComponent implements OnInit {
   // getting the subcategories from selected category then assign the values to subCategory
   // then calling the getCategoryVarient() to get the uivarients
   getSubCategories(id: any) {
-    console.log("getting subcat----------------");
+   
     this.servicesService.getSubCategoty(id).subscribe({
       next: async (response) => {
         console.log(response, 'sub cat  normal');
-        this.subCategory = response;
+        // this.subCategory = response;
+          this.subCategory= this.filteringSubCat(response);
         // if (this.services[this.selectedCat].uiVariant.length === 1) {
           this.nameOfUiVarientSelected =this.services[this.selectedCat].uiVariant[0];
           this.selectedSubCatIndex = 0;
@@ -148,6 +149,19 @@ export class SubServicesComponent implements OnInit {
     });
   }
 
+  filteringSubCat(item: any): any[] {
+    const filteredItems: any[] = [];
+  
+    let full= item.filter((i: any) => 
+      this.subCatVarFromLocation.some((ser: any) => 
+        i.name.toLowerCase() === ser.subcategory.toLowerCase()
+      )
+    );
+  console.log("filtered ===",full);
+    // Return the filtered items after the process is completed
+    return full;
+  }
+  
   // when user select the sub-category we are assigning the index of selected sub-cat to selectedSubCatIndex
   // And calling to getSubCategoryVarients() to get the ui varients 
 
@@ -169,7 +183,7 @@ export class SubServicesComponent implements OnInit {
     const selectedVariantName = this.services[this.selectedCat].uiVariant[this.selectedIndex];
     console.log('uivareint name', selectedVariantName);
     this.nameOfUiVarientSelected = selectedVariantName;
-    console.log("sub category");
+    console.log("sub category at filtering the services by varients",this.subCategory);
     // console.log(this.nameOfUiVarientSelected, 'name');
     if (selectedVariantName != 'None') {
       const filteredVariants = this.subCategory.filter(
@@ -182,13 +196,17 @@ export class SubServicesComponent implements OnInit {
     }
    
     console.log('sub category after filtering ui vaeints', this.filteredSubCat);
+    
     this.selectSubCategory(0);
   }
+
+
+  
   // getting the sub-category services varients like 1bhk 2bhk and sending this to add() to add the count in each varient
   getSubCategoryVarient() {
     const selectedId = this.servicesService.selectedServiceId;
     const selectedSubCatId = this.filteredSubCat[this.selectedSubCatIndex]._id;
-    console.log("seleted cat id",selectedId, "selected sub cat id",selectedSubCatId);
+    // console.log("seleted cat id",selectedId, "selected sub cat id",selectedSubCatId);
     this.servicesService
       .getSubCatVarient(selectedId, selectedSubCatId)
       .subscribe(
@@ -228,24 +246,48 @@ export class SubServicesComponent implements OnInit {
       'ui name'
     );
     this.nameOfUiVarientSelected = this.services[this.selectedCat].uiVariant[0];
-    
-    this.subCatVarFromLocation.forEach((i: any) => {
-      // Filter items based on the matching servicename and cat name
-      const matches = item
-        .filter(
-          (cat: any) => i.servicename.toLowerCase() === cat.name.toLowerCase()
-        )
-        .map((cat: any) => {
-          // Add the price from subCatVarFromLocation to each matched item
-          return {
-            ...cat, // Spread the original cat object
-            price: i.price[this.nameOfUiVarientSelected], // Add the price from subCatVarFromLocation
-          };
-        });
+    if (this.subCatVarFromLocation.length!=0) {
+      this.subCatVarFromLocation.forEach((i: any) => {
+        // Filter items based on the matching servicename and cat name
+        const matches = item
+          .filter(
+            (cat: any) => i.servicename.toLowerCase() === cat.name.toLowerCase()
+          )
+          .map((cat: any) => {
+            
+             // Add the price from subCatVarFromLocation to each matched item 
+            //  checking whether offer price is provided for this service. If yes 
+            // adding the offer price also
+            if (Object.keys(i.offerPrice).length!=0) {
+              // console.log(i.offerPrice,"offer price");
+              return {
+                ...cat,
+                price:i.price[this.nameOfUiVarientSelected],
+                offerPrice:i.offerPrice[this.nameOfUiVarientSelected]
+              }
+            }
+            else{
+              return {
+                ...cat, // Spread the original cat object
+                offerPrice:"0",
+                price: Number(i.price[this.nameOfUiVarientSelected]), // Add the price from subCatVarFromLocation
+              };
+            }
+           
+          
+          });
+  
+        // Concatenate the matches with 'fill'
+        fill = fill.concat(matches);
+      });
 
-      // Concatenate the matches with 'fill'
-      fill = fill.concat(matches);
-    });
+      if (fill.length===0) {
+        fill=item;
+      }
+    } else {
+      fill=item;
+    }
+  
 
     console.log(fill, 'fill');
     this.addingPrice(fill);
@@ -254,6 +296,7 @@ export class SubServicesComponent implements OnInit {
   }
 
   // adding the price to the filtered services
+  // adding the custom price if the service has an cutom price
   addingPrice(fill: any) {
     console.log(
       this.services[this.selectedCat]?.uiVariant[this.selectedIndex],
@@ -263,12 +306,17 @@ export class SubServicesComponent implements OnInit {
     console.log(fill,"forchecking");
     console.log(this.priceFromLoc,"for checking");
     let addedPrice;
+    
+    /**
+     * mapping the serive getting defult and checking whether the cprices comming through the pincode
+     * api 
+     */
     const add = fill.map((i: any) => {
       this.priceFromLoc.forEach((priceFL) => {
         if (i.name === priceFL.servicename) {
           if (priceFL.isCustom) {
             console.log('is custum price');
-            i.price = priceFL.price[this.nameOfUiVarientSelected];
+            i.price = Number(priceFL.price[this.nameOfUiVarientSelected]);
           }
         }
       });
@@ -278,15 +326,15 @@ export class SubServicesComponent implements OnInit {
     console.log(add, 'added custom price');
   }
 
-  expandedIndex: number | null = null;
+  // expandedIndex: number | null = null;
 
-  expand(index: number): void {
-    if (this.expandedIndex === index) {
-      this.expandedIndex = null; // Collapse if the same index is clicked
-    } else {
-      this.expandedIndex = index; // Expand the new index
-    }
-  }
+  // expand(index: number): void {
+  //   if (this.expandedIndex === index) {
+  //     this.expandedIndex = null; // Collapse if the same index is clicked
+  //   } else {
+  //     this.expandedIndex = index; // Expand the new index
+  //   }
+  // }
 
   incrementCount(index: any): void {
     index.count++;
@@ -302,13 +350,20 @@ export class SubServicesComponent implements OnInit {
 
   // adding item to cart
   addItem(item: any): void {
+    let price:number | null=null
     if (!localStorage.getItem('userId')) {
       this.demoService.openDialog('Need to login to add service');
       this.router.navigate(['auth']);
     }
     console.log(item);
     const userId = this.authenticService.getFromLocalStorage();
-    const price=Number(item.price)
+    if (item.offerPrice!=0 && item.offerPrice !=undefined) {
+      price=Number(item.offerPrice)
+    }
+    else{
+      price=Number(item.price)
+    }
+    console.log(price,"price for cart");
     const requestBody = [
       {
         categoryId: item.categoryId._id,

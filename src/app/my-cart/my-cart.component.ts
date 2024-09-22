@@ -140,6 +140,14 @@ export class MyCartComponent implements OnInit {
   decrementCount(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
+      this.mycartService.updateingQuantity(item).subscribe({
+        next:(next)=>{
+          console.log(next);
+          this.calAmount();
+        },error:(err)=>{
+          console.log(err.error.message);
+        }
+      })
     }
   }
   incrementCount(item: any) {
@@ -147,6 +155,14 @@ export class MyCartComponent implements OnInit {
     this.amount = this.amount;
     // this.calAmount();
     item.quantity++;
+    this.mycartService.updateingQuantity(item).subscribe({
+      next:(next)=>{
+        console.log(next);
+        this.calAmount();
+      },error:(err)=>{
+        console.log(err.error.message);
+      }
+    })
   }
 
   // schedule
@@ -238,8 +254,9 @@ export class MyCartComponent implements OnInit {
   // amounts
 
   calAmount() {
+    this.amount=0;
     this.subCategoryVarient.forEach((item: any) => {
-      this.amount = this.amount + item.serviceId.serviceVariants[0].price;
+      this.amount = this.amount + (item.price*item.quantity);
     });
   }
   navToSeparate() {

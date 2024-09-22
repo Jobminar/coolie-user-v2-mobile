@@ -104,7 +104,8 @@ export class AddressComponent {
     this.userDetailsService.formatingAddress(this.responseAddress[index]);
     this.userDetailsService.selectedAddress=this.userDetailsService.fullAddress[index];
     this.userDetailsService.setSelectedAddress(this.responseAddress[index]);
-   
+
+    // localStorage.setItem('selectedAddress', JSON.stringify(address));
     this.demoServices.openDialog('address selected')
     this.location.back();
   }

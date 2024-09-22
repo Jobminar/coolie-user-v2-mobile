@@ -86,17 +86,41 @@
                         <section>
                             <div class="name-div">
                                 <span>{{item.name}}</span>
-                                <span class="material-symbols-outlined" (click)="expand(i)">
+                                <!-- <span class="material-symbols-outlined" (click)="expand(i)">
                                     {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
-                                </span>
+                                </span> -->
                             </div>
-                            <div *ngIf="expandedIndex === i" style="background-color: transparent;">
-                                <p id="description">{{item?.description}}</p>
-                            </div>
-                            <div class="amount-btn">
-                                <span class="price">₹ {{item?.price}}</span>
+                            <!-- <div class="amount-btn"> -->
+                                @if (item.offerPrice!='0' && item.offerPrice !=undefined) {
+                                    <p class="price-continer">
+                                        <del class="price"> ₹ {{item?.price}}</del>
+                                        <span class="price" > <img src="assets/logo/offer.svg"> {{item?.offerPrice}}</span>
+                                        <span class="price">
+                                            <img src="assets/logo/premium.svg"> 
+                                            {{ (item?.offerPrice - (item?.offerPrice * 0.10)) | number:'1.2-2' }}
+                                        </span>                                          
+                                    </p>
+                                }
+                                @else {
+                                    <p class="price-continer">
+                                    <span class="price">Starts at ₹ {{item?.price}}</span>
+                                    <span class="price">
+                                        <img src="assets/logo/premium.svg"> 
+                                        {{ (item?.offerPrice - (item?.offerPrice * 0.10)) | number:'1.2-2' }}
+                                    </span>
+                                    </p>
+                                }
+                                
+                               
                                 <!-- <span class="price">₹ {{services[selectedCat].uiVariant[selectedIndex]}}</span>  -->
-                            </div>
+                            <!-- </div> -->
+                             <hr>
+                             <span id="description">{{item?.description.length>70? item.description.substring(0,70) +".....":item.description}}</span>
+                             <p class="details-span">View details</p>
+                             <!-- <div *ngIf="expandedIndex === i" style="background-color: transparent;">
+                                <p id="description">{{item?.description.length>70? item.description.substring(0,70) +"...":item.description}}</p>
+                            </div> -->
+                           
                         </section>
                         <div class="varient-img">
                             <img [src]="item?.image" loading="lazy" alt="{{item.name}}">

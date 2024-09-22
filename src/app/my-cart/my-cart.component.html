@@ -4,9 +4,9 @@
         <span class="material-symbols-outlined" (click)="navToBack()">
             keyboard_backspace
         </span>
-        <!-- <div>
+        <div>
             <app-select-address></app-select-address>
-        </div> -->
+        </div>
         <div class="subCategoryVarient-div">
             <div class="varient-div" *ngFor="let item of subCategoryVarient; let i = index">
                 <div class="varient-img">
@@ -15,16 +15,16 @@
                 <section>
                     <div class="name-div">
                         <span>{{item.serviceId?.name}}</span>
-                        <span class="material-symbols-outlined" (click)="expand(i)">
+                        <!-- <span class="material-symbols-outlined" (click)="expand(i)">
                             {{ expandedIndex === i ? 'expand_circle_up' : 'expand_circle_down' }}
-                        </span>
+                        </span> -->
                     </div>
-                    <div *ngIf="expandedIndex === i" style="background-color: transparent;">
+                    <!-- <div *ngIf="expandedIndex === i" style="background-color: transparent;">
                         <span>{{item.serviceId.description}}</span>
-                    </div>
+                    </div> -->
                    
                     <div class="amount-btn">
-                        <!-- <span class="price">₹ {{item.serviceId.serviceVariants[0].price}}</span> -->
+                        <span class="price">₹ {{item.price}}</span>
                         <div id="delete">
                             <span class="material-symbols-outlined" (click)="delete(item?._id,item)">
                             delete

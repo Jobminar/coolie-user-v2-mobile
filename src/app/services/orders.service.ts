@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MyCartService } from './my-cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { Observable } from 'rxjs';
 export class OrdersService {
 
   constructor(private readonly http:HttpClient,
-              private readonly router:Router
+              private readonly router:Router,
+              private readonly myCartService:MyCartService
   ) { }
 
   userId=localStorage.getItem('userId');
@@ -106,7 +108,8 @@ export class OrdersService {
     this.http.post(api, requestBody).subscribe(
       response => {
         console.log(response);
-        alert("Order post Sucessfully")
+        alert("Order post Sucessfully from alert in fe")
+        this.myCartService.deletingCartAllItems();
         this.router.navigate(['afterOrder'])
       },
       err => {

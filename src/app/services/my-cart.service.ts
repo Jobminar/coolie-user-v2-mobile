@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -43,6 +43,27 @@ export class MyCartService {
     return this.http.delete<any>(api)
   }
 
+  deletingCartAllItems(){
+    const userId=localStorage.getItem('userId')
+    const api=`https://api.coolieno1.in/v1.0/users/cart/${userId}`;
+    return this.http.delete<any>(api).subscribe({
+      next:(res)=>{
+        console.log(res," cart cleared");
+      },error:(err:HttpErrorResponse)=>{
+        console.log(err.error.message);
+      }
+    })
+  }
+
+  updateingQuantity(item:any):Observable<any>{
+    const id=item._id;
+    const userId=localStorage.getItem('userId')
+    const api=`https://api.coolieno1.in/v1.0/users/cart/${userId}/${id}`;
+    const requestBody={
+      quantity:item.quantity
+    }
+    return this.http.put(api,requestBody)
+  }
   getingLength(): Observable<number> {
     return this.getCartItems(this.userId).pipe(
       map(response => response[0]?.items.length || 0), // Return length or 0 if response[0] is undefined
